@@ -27,7 +27,7 @@ const benefits = [
 
 const BenefitsSection = () => {
   return (
-    <div className="bg-gray-50 py-10">
+    <div className=" ">
       {/* Top dotted line */}
       <div className="border-t border-dashed border-l-2 border-green-800 w-full mb-20 mt-7 "></div>
 

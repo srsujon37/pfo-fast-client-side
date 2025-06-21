@@ -10,7 +10,7 @@ AOS.init();
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <section className="max-w-7xl mx-auto">
+    <section className=" bg-[#eaeced]">
       <RouterProvider router={router} />
     </section>
   </StrictMode>

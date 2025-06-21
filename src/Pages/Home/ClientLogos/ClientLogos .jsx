@@ -12,7 +12,7 @@ const logos = [logo1, logo2, logo3, logo4, logo5, logo6, logo7];
 
 const ClientLogos = () => {
   return (
-    <div className="bg-gray-100 py-10">
+    <div className=" py-10">
       <h2 className="text-3xl font-bold text-[#03373D] text-center mb-12">We've helped thousands of sales teams</h2>
       <Marquee speed={50} pauseOnHover={true} gradient={false}>
         {logos.map((logo, index) => (
