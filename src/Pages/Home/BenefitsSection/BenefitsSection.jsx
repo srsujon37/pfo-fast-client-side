@@ -29,13 +29,13 @@ const BenefitsSection = () => {
   return (
     <div className="bg-gray-50 py-10">
       {/* Top dotted line */}
-      <div className="border-t border-dotted border-gray-300 w-full mb-10"></div>
+      <div className="border-t border-dashed border-l-2 border-green-800 w-full mb-20 mt-7 "></div>
 
-      <div className="container mx-auto px-4 space-y-10">
+      <div className="container mx-auto px-4 space-y-10 ">
         {benefits.map((item, idx) => (
           <div
             key={idx}
-            className="flex flex-col md:flex-row items-center bg-white rounded-lg shadow-sm p-6 gap-6"
+            className="flex flex-col md:flex-row items-center bg-white rounded-4xl shadow-sm p-6 gap-6 "
           >
             {/* Left Image */}
             <div className="w-full md:w-1/4 flex justify-center">
@@ -43,11 +43,11 @@ const BenefitsSection = () => {
             </div>
 
             {/* Vertical Dotted Line */}
-            <div className="hidden md:block border-l-2 border-dotted border-gray-300 h-full"></div>
+            <div className="hidden md:block border-l-2 border-dashed border-green-700 h-24"></div>
 
             {/* Right Content */}
             <div className="w-full md:w-3/4 text-center md:text-left space-y-2">
-              <h3 className="text-xl font-bold text-gray-800">{item.title}</h3>
+              <h3 className="text-xl font-extrabold text-[#03373D]">{item.title}</h3>
               <p className="text-gray-600">{item.description}</p>
             </div>
           </div>
@@ -55,7 +55,7 @@ const BenefitsSection = () => {
       </div>
 
       {/* Bottom dotted line */}
-      <div className="border-t border-dotted border-gray-300 w-full mt-10"></div>
+      <div className="border-t border-dashed border-l-2 border-green-800 w-full mt-20 mb-8"></div>
     </div>
   );
 };
