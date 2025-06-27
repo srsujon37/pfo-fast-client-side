@@ -60,7 +60,7 @@ const Register = () => {
 
             <button className="btn bg-yellow-300 mt-4">Register</button>
           </fieldset>
-           <p><small>Already have an account? <Link to='login' className="text-blue-500 btn btn-link">Login</Link></small></p>
+           <p><small>Already have an account? <Link to='/login' className="text-blue-500 btn btn-link">Login</Link></small></p>
         </form>
         <SocialLogin/>
       </div>
