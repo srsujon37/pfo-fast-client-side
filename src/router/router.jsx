@@ -25,7 +25,7 @@ export const router = createBrowserRouter([
         {
             path: '/sendParcel',
             element: <PrivateRoute> <SendParcel></SendParcel> </PrivateRoute>,
-            
+            loader: () => fetch('./mapData.json')
         },
     ]
   },
