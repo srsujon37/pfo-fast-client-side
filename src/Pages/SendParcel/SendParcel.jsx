@@ -148,8 +148,20 @@ const handleConfirm = async (formData, cost) => {
     // Example:
     // const response = await api.post('/parcels', parcelData);
     // console.log('API Response:', response.data);
-
-    
+    axiosSecure.post('/parcel', parcelData)
+    .then(res =>{
+      console.log(res.data);
+      if (res.data.insertedId) {
+        // redirect to a payment page
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Processing to payment gateway",
+            showConfirmButton: false,
+            timer: 1500
+          });
+      }
+    })
     
     // For demo purposes, we'll just show a success message
     Swal.fire({
