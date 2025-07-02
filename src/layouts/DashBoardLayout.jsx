@@ -1,8 +1,14 @@
 import React from "react";
 import { Outlet } from "react-router";
 import ProFastLogo from "../Pages/Shared/ProFastLogo/ProFastLogo";
-import {  NavLink } from "react-router";
-
+import { NavLink } from "react-router";
+import {
+  FaHome,
+  FaBoxOpen,
+  FaMoneyCheckAlt,
+  FaMapMarkedAlt,
+  FaUserEdit,
+} from "react-icons/fa";
 
 const DashBoardLayout = () => {
   return (
@@ -33,9 +39,7 @@ const DashBoardLayout = () => {
             </label>
           </div>
           <div className="mx-2 flex-1 px-2 lg:hidden">Dashboard</div>
-          <div className="hidden flex-none lg:hidden">
-
-          </div>
+          <div className="hidden flex-none lg:hidden"></div>
         </div>
         {/* Page content here */}
         <Outlet></Outlet>
@@ -54,10 +58,38 @@ const DashBoardLayout = () => {
           {/* Sidebar content here */}
           <ProFastLogo></ProFastLogo>
           <li>
-            <a>Home</a>
+            <NavLink to="/dashboard/home" className="flex items-center gap-2">
+              <FaHome /> Home
+            </NavLink>
           </li>
           <li>
-            <a><NavLink to='/dashboard/myParcels'> My Parcels</NavLink> </a>
+            <NavLink
+              to="/dashboard/myParcels"
+              className="flex items-center gap-2"
+            >
+              <FaBoxOpen /> My Parcels
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/paymentHistory"
+              className="flex items-center gap-2"
+            >
+              <FaMoneyCheckAlt /> Payment History
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/dashboard/track" className="flex items-center gap-2">
+              <FaMapMarkedAlt /> Track a Package
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/profile"
+              className="flex items-center gap-2"
+            >
+              <FaUserEdit /> Update Profile
+            </NavLink>
           </li>
         </ul>
       </div>
