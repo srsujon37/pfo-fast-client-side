@@ -3,7 +3,13 @@ import { Link, NavLink } from "react-router";
 import useAuth from './../../../Hooks/useAuth';
 
 const Navbar = () => {
-  const {user} =useAuth()
+  const {user, logOut} =useAuth()
+
+  const handleLogOut = () =>{
+    logOut()
+    .then(res => {console.log(res)})
+    .catch (error => console.log(error))
+  }
   const navItems = (
     <>
       <li> <NavLink to="/">Home</NavLink> </li>
@@ -55,7 +61,7 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <Link to='login' className="btn btn-primary">Login</Link>
+        { user ? <button onClick={handleLogOut} className="btn btn-primary"> Log Out</button> : <Link to='login' className="btn btn-primary">Login</Link>}
       </div>
     </div>
   );
