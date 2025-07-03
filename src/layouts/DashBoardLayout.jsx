@@ -8,6 +8,8 @@ import {
   FaMoneyCheckAlt,
   FaMapMarkedAlt,
   FaUserEdit,
+  FaMotorcycle,
+  FaClock
 } from "react-icons/fa";
 
 const DashBoardLayout = () => {
@@ -89,6 +91,22 @@ const DashBoardLayout = () => {
               className="flex items-center gap-2"
             >
               <FaUserEdit /> Update Profile
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/activeRiders"
+              className="flex items-center gap-2"
+            >
+              <FaMotorcycle /> Active Riders
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/pendingRiders"
+              className="flex items-center gap-2"
+            >
+              <FaClock /> Pending Riders
             </NavLink>
           </li>
         </ul>
