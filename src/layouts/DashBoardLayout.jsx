@@ -10,10 +10,15 @@ import {
   FaUserEdit,
   FaMotorcycle,
   FaClock,
-  FaUserShield
+  FaUserShield,
 } from "react-icons/fa";
+import useUserRole from "../Hooks/useUserRole";
 
 const DashBoardLayout = () => {
+  const { role, isLoading } = useUserRole();
+  console.log(role);
+  if (isLoading) return <span>Loading...</span>;
+
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -61,7 +66,7 @@ const DashBoardLayout = () => {
           {/* Sidebar content here */}
           <ProFastLogo></ProFastLogo>
           <li>
-            <NavLink to="/dashboard/home" className="flex items-center gap-2">
+            <NavLink to="/" className="flex items-center gap-2">
               <FaHome /> Home
             </NavLink>
           </li>
@@ -94,31 +99,36 @@ const DashBoardLayout = () => {
               <FaUserEdit /> Update Profile
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/dashboard/activeRiders"
-              className="flex items-center gap-2"
-            >
-              <FaMotorcycle /> Active Riders
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/pendingRiders"
-              className="flex items-center gap-2"
-            >
-              <FaClock /> Pending Riders
-            </NavLink>
-          </li>
-          {/* admin routes */}
-          <li>
-            <NavLink
-              to="/dashboard/makeAdmin"
-              className="flex items-center gap-2"
-            >
-              <FaUserShield /> Make Amin
-            </NavLink>
-          </li>
+          {/* riders link */}
+          {!isLoading && role === 'admin' &&
+            <>
+              <li>
+                <NavLink
+                  to="/dashboard/activeRiders"
+                  className="flex items-center gap-2"
+                >
+                  <FaMotorcycle /> Active Riders
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/pendingRiders"
+                  className="flex items-center gap-2"
+                >
+                  <FaClock /> Pending Riders
+                </NavLink>
+              </li>
+              {/* admin routes */}
+              <li>
+                <NavLink
+                  to="/dashboard/makeAdmin"
+                  className="flex items-center gap-2"
+                >
+                  <FaUserShield /> Make Amin
+                </NavLink>
+              </li>
+            </>
+          }
         </ul>
       </div>
     </div>

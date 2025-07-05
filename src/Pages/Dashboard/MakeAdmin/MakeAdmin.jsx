@@ -77,7 +77,13 @@ const MakeAdmin = () => {
                 return (
                   <tr key={user._id}>
                     <td>{user.email}</td>
-                    <td>{new Date(user.createdAt).toLocaleDateString()}</td>
+                    {/* <td>{new Date(user.created_at).toLocaleDateString()}</td> */}
+<td>
+  {user.created_at
+    ? new Date(user.created_at?.$date || user.created_at).toLocaleDateString()
+    : "N/A"}
+</td>
+
                     <td>{user.role || "user"}</td>
                     <td>
                       <button
