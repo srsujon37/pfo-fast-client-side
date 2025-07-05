@@ -60,7 +60,7 @@ const ActiveRiders = () => {
 
   // নাম অনুসারে সার্চ করা
   const filteredRiders = riders.filter((rider) =>
-    rider.name.toLowerCase().includes(searchTerm.toLowerCase())
+    rider.name?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   if (isLoading) return <p className="text-center mt-10">Loading...</p>;

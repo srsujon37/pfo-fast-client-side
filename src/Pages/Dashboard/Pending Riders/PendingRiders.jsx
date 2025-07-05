@@ -8,7 +8,11 @@ const PendingRiders = () => {
   const axiosSecure = useAxiosSecure();
   const [selectedRider, setSelectedRider] = useState(null);
 
-  const { isPending, data: riders = [], refetch } = useQuery({
+  const {
+    isPending,
+    data: riders = [],
+    refetch,
+  } = useQuery({
     queryKey: ["pending-riders"],
     queryFn: async () => {
       const res = await axiosSecure.get("/riders/pending");
@@ -16,48 +20,50 @@ const PendingRiders = () => {
     },
   });
 
-    const handleApprove = async (id) => {
+  const handleApprove = async (id, email) => {
     try {
-        const res = await axiosSecure.patch(`/riders/${id}/status`, {
-        status: 'approved',
-        });
+      console.log("Sending email to backend:", email); // ✅ Make sure this is correct and NOT undefined/null
 
-        if (res.data.message) {
-        Swal.fire("Approved!", "Rider application approved.", "success");
-        refetch();
-        }
-    } catch (err) {
-        console.error("Approval error:", err);
-        Swal.fire("Error", "Failed to approve rider.", "error");
-    }
-    };
-
-
-const handleCancel = async (id) => {
-  const confirm = await Swal.fire({
-    title: "Are you sure?",
-    text: "You want to cancel this application?",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonText: "Yes, cancel it!",
-  });
-
-  if (confirm.isConfirmed) {
-    try {
       const res = await axiosSecure.patch(`/riders/${id}/status`, {
-        status: 'cancelled',
+        status: "approved",
+        email, // ✅ Must send valid email here
       });
 
       if (res.data.message) {
-        Swal.fire("Cancelled", "Application has been cancelled.", "success");
+        Swal.fire("Approved!", "Rider application approved.", "success");
         refetch();
       }
     } catch (err) {
-      console.error("Cancel error:", err);
-      Swal.fire("Error", "Failed to cancel application.", "error");
+      console.error("Approval error:", err);
+      Swal.fire("Error", "Failed to approve rider.", "error");
     }
-  }
-};
+  };
+
+  const handleCancel = async (id) => {
+    const confirm = await Swal.fire({
+      title: "Are you sure?",
+      text: "You want to cancel this application?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, cancel it!",
+    });
+
+    if (confirm.isConfirmed) {
+      try {
+        const res = await axiosSecure.patch(`/riders/${id}/status`, {
+          status: "cancelled",
+        });
+
+        if (res.data.message) {
+          Swal.fire("Cancelled", "Application has been cancelled.", "success");
+          refetch();
+        }
+      } catch (err) {
+        console.error("Cancel error:", err);
+        Swal.fire("Error", "Failed to cancel application.", "error");
+      }
+    }
+  };
 
   if (isPending) return <p className="text-center mt-10">Loading...</p>;
 
@@ -99,13 +105,17 @@ const handleCancel = async (id) => {
                     </button>
                     <button
                       className="btn btn-sm btn-success"
-                      onClick={() => handleApprove(rider._id)}
+                      onClick={() =>
+                        handleApprove(rider._id, rider.email)
+                      }
                     >
                       <FaCheckCircle /> Approve
                     </button>
                     <button
                       className="btn btn-sm btn-error"
-                      onClick={() => handleCancel(rider._id)}
+                      onClick={() =>
+                        handleCancel(rider._id)
+                      }
                     >
                       <FaTimesCircle /> Cancel
                     </button>
@@ -129,15 +139,33 @@ const handleCancel = async (id) => {
             </button>
             <h3 className="text-lg font-bold mb-4">Rider Details</h3>
             <div className="space-y-1 text-sm">
-              <p><strong>Name:</strong> {selectedRider.name}</p>
-              <p><strong>Email:</strong> {selectedRider.email}</p>
-              <p><strong>Phone:</strong> {selectedRider.phone}</p>
-              <p><strong>Age:</strong> {selectedRider.age}</p>
-              <p><strong>NID:</strong> {selectedRider.nidCardNumber}</p>
-              <p><strong>Bike Brand:</strong> {selectedRider.bikeBrand}</p>
-              <p><strong>Bike Reg No:</strong> {selectedRider.bikeRegNumber}</p>
-              <p><strong>Region:</strong> {selectedRider.region}</p>
-              <p><strong>District:</strong> {selectedRider.district}</p>
+              <p>
+                <strong>Name:</strong> {selectedRider.name}
+              </p>
+              <p>
+                <strong>Email:</strong> {selectedRider.email}
+              </p>
+              <p>
+                <strong>Phone:</strong> {selectedRider.phone}
+              </p>
+              <p>
+                <strong>Age:</strong> {selectedRider.age}
+              </p>
+              <p>
+                <strong>NID:</strong> {selectedRider.nidCardNumber}
+              </p>
+              <p>
+                <strong>Bike Brand:</strong> {selectedRider.bikeBrand}
+              </p>
+              <p>
+                <strong>Bike Reg No:</strong> {selectedRider.bikeRegNumber}
+              </p>
+              <p>
+                <strong>Region:</strong> {selectedRider.region}
+              </p>
+              <p>
+                <strong>District:</strong> {selectedRider.district}
+              </p>
             </div>
           </div>
         </div>

@@ -9,7 +9,8 @@ import {
   FaMapMarkedAlt,
   FaUserEdit,
   FaMotorcycle,
-  FaClock
+  FaClock,
+  FaUserShield
 } from "react-icons/fa";
 
 const DashBoardLayout = () => {
@@ -107,6 +108,15 @@ const DashBoardLayout = () => {
               className="flex items-center gap-2"
             >
               <FaClock /> Pending Riders
+            </NavLink>
+          </li>
+          {/* admin routes */}
+          <li>
+            <NavLink
+              to="/dashboard/makeAdmin"
+              className="flex items-center gap-2"
+            >
+              <FaUserShield /> Make Amin
             </NavLink>
           </li>
         </ul>
