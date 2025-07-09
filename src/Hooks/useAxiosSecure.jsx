@@ -11,7 +11,7 @@ const axiosSecure = axios.create({
 
 const useAxiosSecure = () => {
 
-  const {user} = useAuth()
+  const {user, logOut} = useAuth()
   const navigate = useNavigate()
   
     axiosSecure.interceptors.request.use( config =>{
@@ -26,8 +26,15 @@ const useAxiosSecure = () => {
     }, error => {
       console.log('inside res interceptor',error.status);
       const status = error.status;
-      if (status === 402) {
+      if (status === 403) {
         navigate('/forbidden')
+      }
+      else if (status === 401){
+        logOut()
+        .then(() =>{
+          navigate('/login')
+        })
+        .catch(() =>{ })
       }
       return Promise.reject(error);
     })

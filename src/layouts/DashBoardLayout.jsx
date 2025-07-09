@@ -11,13 +11,14 @@ import {
   FaMotorcycle,
   FaClock,
   FaUserShield,
+  FaTasks,
 } from "react-icons/fa";
 import useUserRole from "../Hooks/useUserRole";
 
 const DashBoardLayout = () => {
-  const { role, isLoading } = useUserRole();
+  const { role, roleLoading } = useUserRole();
   console.log(role);
-  if (isLoading) return <span>Loading...</span>;
+  if (roleLoading) return <span>Loading...</span>;
 
   return (
     <div className="drawer lg:drawer-open">
@@ -99,9 +100,33 @@ const DashBoardLayout = () => {
               <FaUserEdit /> Update Profile
             </NavLink>
           </li>
-          {/* riders link */}
-          {!isLoading && role === 'admin' &&
+
+          {/* rider Links */}
+
+          {!roleLoading && role === "rider" && (
             <>
+              <li>
+                <NavLink
+                  to="/dashboard/pending-deliveries"
+                  className="flex items-center gap-2"
+                >
+                  <FaTasks /> My Deliveries
+                </NavLink>
+              </li>
+            </>
+          )}
+
+          {/* admin link */}
+          {!roleLoading && role === "admin" && (
+            <>
+              <li>
+                <NavLink
+                  to="/dashboard/assignRider"
+                  className="flex items-center gap-2"
+                >
+                  <FaMotorcycle /> Assign Rider
+                </NavLink>
+              </li>
               <li>
                 <NavLink
                   to="/dashboard/activeRiders"
@@ -110,6 +135,7 @@ const DashBoardLayout = () => {
                   <FaMotorcycle /> Active Riders
                 </NavLink>
               </li>
+
               <li>
                 <NavLink
                   to="/dashboard/pendingRiders"
@@ -128,7 +154,7 @@ const DashBoardLayout = () => {
                 </NavLink>
               </li>
             </>
-          }
+          )}
         </ul>
       </div>
     </div>

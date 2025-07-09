@@ -4,19 +4,31 @@ import useAuth from './useAuth';
 import useAxiosSecure from './useAxiosSecure';
 
 const useUserRole = () => {
-  const { user, loading } = useAuth(); // ধরে নিচ্ছি loading আছে
+  const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const { data: role, isLoading, isError } = useQuery({
+  const { data: role, isLoading, isError, error } = useQuery({
     queryKey: ['user-role', user?.email],
-    enabled: !!user?.email && !loading,
+    enabled: !!user?.email && !loading, // wait for user to load
     queryFn: async () => {
-      const res = await axiosSecure.get(`/users/role?email=${user.email}`);
-      return res.data.role;
+      try {
+        const res = await axiosSecure.get(`/users/role?email=${user.email}`);
+        console.log("✅ Role response:", res.data); // debug
+        return res.data?.role || null; // fallback if role is undefined
+      } catch (err) {
+        console.error("❌ Error fetching role:", err);
+        throw err;
+      }
     },
   });
 
-  return { role, isLoading, isError };
+  // Debug logs
+  // console.log("👤 User:", user);
+  // console.log("🧾 Loading:", loading);
+  // console.log("🔐 Role:", role);
+
+  return { role, isLoading, isError, error };
 };
 
 export default useUserRole;
+

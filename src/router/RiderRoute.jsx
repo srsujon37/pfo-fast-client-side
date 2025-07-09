@@ -1,9 +1,10 @@
-import { Navigate, useLocation } from "react-router";
-import useAuth from "../Hooks/useAuth";
-import useUserRole from "../Hooks/useUserRole";
+import React from 'react';
+import useAuth from '../Hooks/useAuth';
+import useUserRole from '../Hooks/useUserRole';
+import { Navigate, useLocation } from 'react-router';
 
-const AdminRoute = ({ children }) => {
-  const { user, loading } = useAuth();
+const RiderRoute = ({children}) => {
+ const { user, loading } = useAuth();
   const { role, roleLoading } = useUserRole();
   const location = useLocation();
 
@@ -11,7 +12,7 @@ const AdminRoute = ({ children }) => {
     return <span className="loading loading-ring loading-xl"></span>;
   }
 
-  if (!user || role !== 'admin') {
+  if (!user || role !== 'rider') {
     return (
       <Navigate to="/forbidden" state={{ from: location.pathname }} />
     );
@@ -20,5 +21,4 @@ const AdminRoute = ({ children }) => {
   return children;
 };
 
-export default AdminRoute;
-
+export default RiderRoute;
