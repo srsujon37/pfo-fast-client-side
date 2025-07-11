@@ -12,6 +12,7 @@ import {
   FaClock,
   FaUserShield,
   FaTasks,
+  FaCheckCircle,
 } from "react-icons/fa";
 import useUserRole from "../Hooks/useUserRole";
 
@@ -142,6 +143,14 @@ const DashBoardLayout = () => {
                   className="flex items-center gap-2"
                 >
                   <FaClock /> Pending Riders
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/CompletedDeliveries"
+                  className="flex items-center gap-2"
+                >
+                  <FaCheckCircle /> Completed Deliveries
                 </NavLink>
               </li>
               {/* admin routes */}
